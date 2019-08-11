@@ -16,32 +16,10 @@ class InterfaceController: WKInterfaceController, WKCrownDelegate {
         case Playing
         case Paused
     }
-    var audioPlayer: AVAudioPlayer?
+    var player: AVAudioPlayer?
     var songState: SongState = .Paused
     var currentVolumeLevel: Float = 1.0
     let numberOfSteps = 3
-    
-    func playAudioFile() {
-        guard let url = Bundle.main.url(forResource: "Dangal", withExtension: "mp3") else { return }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-//            // For iOS 11
-//            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-//
-//            // For iOS versions < 11
-//            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3)
-
-            guard let aPlayer = audioPlayer else { return }
-            aPlayer.play()
-        }
-        catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    
 
     @IBOutlet var playButton: WKInterfaceButton!
     @IBOutlet var volumeSlider: WKInterfaceSlider!
@@ -69,6 +47,7 @@ class InterfaceController: WKInterfaceController, WKCrownDelegate {
         if songState == .Paused {
             songState = .Playing
             playButton.setBackgroundImage(UIImage(named: "Pause"))
+            playSound()
         } else {
             songState = .Paused
             playButton.setBackgroundImage(UIImage(named: "Play"))
@@ -88,5 +67,19 @@ class InterfaceController: WKInterfaceController, WKCrownDelegate {
             volumeSlider.setValue(currentVolumeLevel)
         }
     }
-    
+    func playSound() {
+        guard Bundle.main.url(forResource: "Dangal", withExtension: "mp3") != nil else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
