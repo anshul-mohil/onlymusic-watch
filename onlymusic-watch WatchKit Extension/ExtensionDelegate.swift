@@ -1,11 +1,10 @@
 //
 //  ExtensionDelegate.swift
-//  onlymusic-watch WatchKit Extension
+//  onlymusic-watch
 //
 //  Created by Anshul  Mohil on 11/08/19.
 //  Copyright © 2019 Anshul  Mohil. All rights reserved.
 //
-
 import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {

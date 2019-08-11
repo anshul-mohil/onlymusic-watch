@@ -1,9 +1,9 @@
 //
 //  ComplicationController.swift
-//  MusicPlayer WatchKit Extension
+//  onlymusic-watch
 //
-//  Created by Bogdan Pop on 6/20/17.
-//  Copyright © 2017 WeHeartSwift. All rights reserved.
+//  Created by Anshul  Mohil on 11/08/19.
+//  Copyright © 2019 Anshul  Mohil. All rights reserved.
 //
 
 import ClockKit
